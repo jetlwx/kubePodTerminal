@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jmonitor System</title>
+    <script type="text/javascript" src="/static/js/jquery-1.10.2.min.js"></script>
+    <!--
+    <script type="text/javascript" src="/static/js/npm.js" ></script>
+    -->
+    <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+
+
+    <!--<link href="/static/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/comm.css" rel="stylesheet">-->
+
+
+
+
+
+</head>
+
+<body class="body">
+    <form id="form" method="Post" action="/pod/sub" target="_blank">
+        <div>
+            <span>
+        <select name="pod" id="pod">
+     {{range .SPACE}}
+     <option value="{{.}}">{{.}}</option>
+     {{end}}
+ </select>
+        </span>
+            <span><button id="submit" name="pb" type="submit" value="webtty" >Web终端</button></span>
+            <span><button id="submit" name="pb" type="submit" value="dockerlogs" > container Logs</button></span>
+            <span><button id="submit" name="pb" type="submit" value="threadnum" >Tomcat线程数</button></span>
+            <span><button id="submit" name="pb" type="submit" value="jstack" >JAVA Jstack</button></span>
+
+        </div>
+        <div style="margin-top:10px;">
+            <span><input name="keyword"   style="height:25px; width:260px;"/></span>
+            <span>文件名关键字：</span><span><button id="submit" name="pb" type="submit" value="catjavalogs" >Cat tomcat log</button></span>
+            <span><button id="submit" name="pb" type="submit" value="tailjavalogs" >tailf tomcat log</button></span>
+            <span><br>此功能主要用于查看最新的 catalina,access_log ,manager,localhost_,  其它自定义的日志存放路径必须与Tomcat存放一致<br>
+                 2、关键字必须为文件名的部分或全部</span>
+
+        </div>
+    </form>
+
+</body>
+
+</html>
+<!--
+<script>
+    //--------------------------add ---------------------------
+    jQuery(document).ready(function() {
+        jQuery('#form').bind("submit", function() {
+
+            var options = {
+                url: '/pod/sub',
+                type: 'post',
+                dataType: 'text',
+                data: $("#form").serialize(),
+                success: function(data) {
+                    if (data.length > 0)
+                        $("#showtips").fadeIn();
+                    jQuery("#showtips").html(data);　　　　　　　　　　　　　　　　　
+                    $("#showtips").fadeOut(8000);
+                    window.location.reload();
+
+                }
+            };
+            $.ajax(options);
+            return false;
+        })
+
+        $('#submit').click(function() {
+            $('#form').submit();
+        })
+    });
+</script>-->
